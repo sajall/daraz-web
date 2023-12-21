@@ -30,6 +30,7 @@ export function Users() {
     id: "",
   });
 
+  const baseUrl = process.env.REACT_APP_BASE_URL
 
   let [users, setUsers] = useState([]);
 
@@ -38,7 +39,8 @@ export function Users() {
 
   const getUsers = async () => {
     setLoading(true);
-    const response = await axios.get("https://uptight-newt-jewelry.cyclic.app/user-lao");
+    // const response = await axios.get("https://uptight-newt-jewelry.cyclic.app/user-lao");
+    const response = await axios.get(`${baseUrl}/user-lao`);
     if (response.status == 200) {
       setLoading(false);
       setUsers(response?.data.data);
