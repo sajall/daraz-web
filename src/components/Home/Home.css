@@ -1,0 +1,28 @@
+
+#cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  #category{
+    width: 230px;
+    height: 355px;
+    background-color: white !important;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    left: 70px;
+    box-shadow: 2px 2px 10px 2px lightgray;   
+  }
+  #categorybtn{
+    font-size: 13px;
+    color: #757575;
+    text-align: start;
+  }
+  #categorybtn:hover{
+    color: orangered;
+  }

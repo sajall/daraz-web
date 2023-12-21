@@ -1,0 +1,13 @@
+
+#carousel{
+    width: 970px;
+    position: absolute;
+    right: 4%;
+    top: 120px;
+    
+}
+#carousel img{
+    border-radius: 20px;
+
+
+}

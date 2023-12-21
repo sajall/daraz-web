@@ -1,0 +1,54 @@
+#usertable{
+    width: 400px;
+    margin: auto;
+}
+#usertable > tr{
+    border-top: 2px solid black;
+}
+#usertable> tr >td{
+    border: 2px solid black;
+}
+#usertable thead th{
+    border: 2px solid black;
+
+}
+#user{
+    text-align: center;
+}
+
+
+
+.searchInput {
+    position: relative;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.input {
+    border: 1px solid #393C49;
+    border-radius: 7px;
+    background-color: var(--color-form-bg1);
+    color: var(--color-text-primary);
+    height: 50px;
+    text-indent: 35px;
+
+}
+
+.input:focus {
+    border: 1px solid #393C49;
+    /* outline: none; */
+}
+
+.input::placeholder {
+    color: var(--color-text-primary);
+}
+
+.icon {
+    height: 23px;
+    width: 23px;
+    color: var(--color-text-primary);
+    position: absolute;
+    top: 13px;
+    left: 5px;
+}

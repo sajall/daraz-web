@@ -1,0 +1,26 @@
+#myForm {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    border: none;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    border: 1px solid gray;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: ; */
+    align-items: center;
+    /* gap: 20px; */
+
+}
+#myForm input{
+    width: 350px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 20px;
+    /* margin-left: 50px; */
+}
+#myForm button{
+    width: 150px;
+    /* height: 30px; */
+}

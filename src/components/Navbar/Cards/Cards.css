@@ -1,0 +1,41 @@
+
+#about{
+    font-size: 12px;
+    /* margin-top: 0px; */
+}
+#cardBody:hover{
+/* background-color: red; */
+box-shadow: 1px 1px 5px 1px lightgray;
+}
+#ratingStars img{
+    width: 20px;
+}
+#neechyWali{
+    height: 120px;
+ 
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+ 
+}
+.like-btn{
+    position: absolute;
+    right: 0;
+    top: 150px;
+    width: 180px;
+    height: 40px;
+    left: 5px;
+/* margin: auto; */
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px lightgray;
+}
+.liked{
+    fill: red;
+}
+#icon{
+    width: 20px;
+    height: 20px;
+}
+/* #detailsbtn{
+
+} */

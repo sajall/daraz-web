@@ -1,0 +1,12 @@
+
+
+#newCreatedProducts{
+    width: 800px;
+    margin: auto;
+}
+#newCreatedProducts tr{
+    border-top: 2px solid black;
+}
+#newCreatedProducts tr td{
+    border: 2px solid black;
+}

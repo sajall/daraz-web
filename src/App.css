@@ -1,0 +1,17 @@
+
+#main{
+  display: flex;
+  /* background-color: aliceblue; */
+  margin-top: 20px;
+}
+/* #cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+} */
+#categorybtn{
+  border: none;
+  background-color: transparent;
+}
+
