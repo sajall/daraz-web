@@ -35,15 +35,39 @@ import {
   StyledTableCell
 } from "./Styled-component";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import axios from "axios";
 // import  './Users.css'
 
-
-export default function UsersTable({users,
+export default function DashboardTable({products, setProducts ,
     addPopup,
     setAddPopup,
 
 }) {
-//   const theme = useSelector((state) => state.theme.value);
+
+  const getProducts = async () => {
+    // setLoading(true)
+    const response = await axios.get(`/products`);
+    if (response.status == 200) {
+        console.log(response.data , ' this is dashborad');
+      // setLoading(false);
+      setProducts(response?.data);
+    } else {
+      toast.error("error fetching products");
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+
+
+
+  let user =  useSelector((store)=>{
+    return store.UsersSection.userLoggedin
+   });
+
   const theme = 'light'
 
   // search query
@@ -54,7 +78,7 @@ export default function UsersTable({users,
     setSearchQuery(event.target.value);
   };
 
-  const filteredArray = users?.filter((report) =>
+  const filteredArray = products?.filter((report) =>
     searchQuery
       .toLowerCase()
       .split(" ")
@@ -90,8 +114,8 @@ export default function UsersTable({users,
         <Container>
           <TopBox>
             <TopBox1>
-              <TopTypo>Users</TopTypo>
-              <TopTypo1>Total {users?.length} Users</TopTypo1>
+              <TopTypo>products</TopTypo>
+              <TopTypo1>Total {products?.length} products</TopTypo1>
             </TopBox1>
 
             <Box>
@@ -172,27 +196,28 @@ export default function UsersTable({users,
               }}
             >
               <TableRow>
-                <StyledTableCell theme={theme}>Name</StyledTableCell>
+                {/* <StyledTableCell theme={theme}>Name</StyledTableCell> */}
                 <StyledTableCell theme={theme} align="right">
-                  email
+                image
                 </StyledTableCell>
                 <StyledTableCell theme={theme} align="right">
-                  password
+                 Category
                 </StyledTableCell>
                 <StyledTableCell theme={theme} align="right">
-                  Action
+                  Price
                 </StyledTableCell>
                 
               </TableRow>
             </TableHead>
             <TableBody>
               {/* Display the rows based on the current pagination state */}
+{/* ======================================================================================================== */}
+  
 
-
-              { filteredArray?.reverse()
+              {  products?.reverse().filter((product)=>product?.userId == user?._id)
                 ?.slice((page - 1) * rowsPerPage, page * rowsPerPage)
                 .map((row, index) => {
-                 const {email,password} = row
+                 const {category ,price , src} = row
                   return (
                     <>
                       <TableRow
@@ -201,8 +226,8 @@ export default function UsersTable({users,
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <StyledBTableCell>
-                          <Box
+                        {/* <StyledBTableCell> */}
+                          {/* <Box
                             sx={{
                               display: "flex",
                               alignItems: "center",
@@ -218,7 +243,7 @@ export default function UsersTable({users,
                                   fontSize: "14px",
                                 }}
                               >
-                                {/* {row?.name}  */} name
+                               name
                               </Typography>
                               <Typography
                                 sx={{
@@ -226,20 +251,20 @@ export default function UsersTable({users,
                                   fontSize: "12px",
                                 }}
                               >
-                                {/* {row?.code} */} code
+                               code
                               </Typography>
                             </Box>
-                          </Box>
+                          </Box>  */}
+                        {/* </StyledBTableCell> */}
+                        <StyledBTableCell align="right">
+                         <img id="product-image" style={{width:"150px", height:"150px"}} src={src} alt="" /> 
                         </StyledBTableCell>
                         <StyledBTableCell align="right">
-                          {email}
+                          {category}
                         </StyledBTableCell>
                         <StyledBTableCell align="right">
-                          {password}
+                          {price}
                         </StyledBTableCell>
-                       
-
-
                         <TableCell align="right" sx={{ color: "#526484" }}>
                     <Button
                       onClick={() => {
@@ -255,12 +280,23 @@ export default function UsersTable({users,
                     </Button>
 
                     <Button
-                      onClick={() => {
-                        setAddPopup({
-                          isOpen: true,
-                          id: row._id,
-                          isDelete: true,
-                        });
+                      onClick={async() => {
+                        // setAddPopup({
+                        //   isOpen: true,
+                        //   id: row._id,
+                        //   isDelete: true,
+                        // });
+                        try{
+                          const response = await axios.delete(`/delete-product?id=${row._id}`);
+                          if(response.status == 200){
+                             products.splice(index , 1);
+                            //  getProducts();
+                            getProducts();
+                            toast.success('product deleted successfully');
+                           }
+                         }catch(err){
+                           console.log(err , "some unexpected error occured" );
+                         }
                       }}
                       sx={{ color: theme === "light" ? "#526484" : "#fff" }}
                     >
@@ -285,7 +321,7 @@ export default function UsersTable({users,
             }}
             size="large"
             color="primary"
-            count={Math.ceil(users?.length / rowsPerPage)}
+            count={Math.ceil(products?.length / rowsPerPage)}
             page={page}
             variant="outlined"
             onChange={handleChangePagination}
@@ -301,7 +337,7 @@ export default function UsersTable({users,
               },
             }}
             component="div"
-            count={users?.length}
+            count={products?.length}
             page={tablePage}
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}

@@ -4,7 +4,7 @@ import {createStore , combineReducers } from 'redux';
 import { v4  } from 'uuid';
 
 let initialProducts = {
-// orders: [],
+orders: [],
 searched : '',
  products :[
     {
@@ -291,11 +291,11 @@ searched : '',
 
 
         }else if(newData.type == "ADD_TO_CART"){
-        let item =  oldData.products.find((product)=> product.id == newData.payload);
-        item.addTocart = true;
-        // oldData.orders.push(newData.payload)
+        oldData.orders.push(newData.payload) ;
+       
+
       }else if(newData.type == "REMOVE_FROM_CART"){
-        let item =  oldData.products.find((product)=> product.id == newData.payload);
+        let item =  oldData.orders.find((product)=> product._id == newData.payload);
         item.addTocart = !item.addTocart;
       }else if(newData.type == "DELETE_PRODUCT"){
         let item =  oldData.products.find((product)=> product.id == newData.payload);

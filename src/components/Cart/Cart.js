@@ -7,13 +7,10 @@ import { useEffect, useState } from "react";
 
 export function Cart() {
   let data = useSelector((store) => {
-    return store.productsSection;
+    return store.productsSection.orders;
   });
-  // let [ total , setTotal ] = useState(0);
   let total = 0;
-// useEffect(()=>{
 
-// },[])
 //  dispatch 
 let dispatch = useDispatch();
 function orderNow(){
@@ -26,14 +23,7 @@ function orderNow(){
         <div>
 
         this is cart
-        {data.products.
-        filter((product)=>{
-          if(product.addTocart){
-            return true;
-          }
-        })
-        .map((product) => {
-          // setTotal(total+product.price);
+        {data.map((product) => {
           total += product.price;
           return (
             <div id="cartProduct">
@@ -42,7 +32,6 @@ function orderNow(){
                 alt=""
                 style={{ width: "80px", height: "100px" }}
               />
-              {/* price and category */}
               <div id="priceCategory">
               <strong>{product.category}</strong>
               <p style={{color: 'oarnge'}}>RS.{product.price}</p>
@@ -50,7 +39,7 @@ function orderNow(){
             <button id="CancelOrder" onClick={()=>{
                       dispatch({
                         type:"REMOVE_FROM_CART",
-                        payload:product.id
+                        payload:product._id
                       })
             }}>cancel</button>
             </div>
@@ -63,26 +52,3 @@ function orderNow(){
     </>
   );
 }
-
-{/* 
-<div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-      </Modal>
-    </div> */}

@@ -27,6 +27,7 @@ let dispatch = useDispatch();
           style={{ width: "180px", height: "190px" }}
           alt="..."
         />
+        {/* <img src="/fb.JPG" alt=""    id="cardimg"  className="card-img-top"     style={{ width: "180px", height: "190px" }}/> */}
         <div id="neechyWali">
 {/* like btn */}
           <span className={ product.abc ? "like-btn liked " :'like-btn' } onClick={()=>{
@@ -58,7 +59,7 @@ let dispatch = useDispatch();
           <button id="detailsbtn" className="btn btn-primary">
             <NavLink
               style={{ textDecoration: "none" ,  color: 'white' }}
-              to={`product-details/${product.id}`}
+              to={`product-details/${product._id}`}
             >
               show details
             </NavLink>

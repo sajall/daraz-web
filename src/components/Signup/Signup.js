@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 
-axios.defaults.baseURL = "http://localhost:6070/";
+// axios.defaults.baseURL = "http://localhost:6070/";
 
 
 
@@ -13,17 +13,14 @@ axios.defaults.baseURL = "http://localhost:6070/";
 
 export function Signup({user , setUser}){
 
+
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   let params = useParams();
 
 
 let navigate =useNavigate();
  let dispatch =  useDispatch();
-
-//  recalling get api that i made in users page
-// const recallGetApi = async()=>{
-//   await axios.get('/user-lao' ).then((resp)=>{
-//    });
-// }
 
     let {register , handleSubmit  , reset, formState:{errors}} = useForm();
     function saveData(data){
@@ -36,7 +33,7 @@ let navigate =useNavigate();
           });
       }else{
         // data.id = v4();
-        axios.post('/create-user' , data).then((resp)=>{
+        axios.post(`${baseUrl}/create-user` , data).then((resp)=>{
   
         })
       }

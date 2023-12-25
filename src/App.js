@@ -45,23 +45,12 @@ function App() {
   } , [])
 
 
-
-
-  // useEffect(()=>{
-  //   axios.post('/check-token' ,{token:localStorage.getItem('someToken')}).then((resp)=>{
-  // if(resp.data){
-  //   dispatch({
-  //     type :  "USER_LOGIN_HOGYA",
-  //     payload : resp.data
-  //   })
-  // }
-  //   })
-  // } , []);
-
   return (
     <>
+
       <Router>
         <Navbar />
+    {/* <img src="/death.jpg" alt="" style={{width:'500px', height:'500px'}} /> */}
         <Routes>
           <Route
             path="/Login"

@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
+const Deleteproduct = ({ addPopup, setAddPopup, callFunc }) => {
 
 
 // base url for api's
@@ -236,9 +236,8 @@ const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
                   <Button variant="outlined"
                     onClick={async () => {
                      
-                    const res = await axios.delete(`${baseUrl}/delete-user/${addPopup.id}` );
-                    
-
+                    const res = await axios.delete(`/delete-product?id=${addPopup.id}` );
+                    // axios.delete(`/delete-product?id=${item._id}`);
                       if (res.status == 200) {
                         toast.success("User Deleted!");
 
@@ -260,6 +259,6 @@ const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
       </Box>
     </Dialog>
   );
-};
+}
 
-export default AddEditUser;
+export default Deleteproduct;

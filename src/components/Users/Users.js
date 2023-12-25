@@ -11,26 +11,17 @@ import { Button } from "@mui/material";
 // import { Button } from "bootstrap";
 
 // axios.defaults.baseURL = "https://dark-plum-brown-bear-vest.cyclic.app/";
-axios.defaults.baseURL = "http://localhost:6070/";
+// axios.defaults.baseURL = "http://localhost:6070/";
 
 export function Users() {
-  // let data = useSelector((store)=>{
-  //     return store.UsersSection;
-  // });
 
-  //   useEffect(() => {
-  //     axios.get("/user-lao").then((resp) => {
-  //       setUsers(resp.data.data);
-  //       console.log(resp.data.data, "users data response");
-  //     });
-  //   }, []);
+  const baseUrl = process.env.REACT_APP_BASE_URL
 
   const [addPopup, setAddPopup] = useState({
     isOpen: false,
     id: "",
   });
 
-  const baseUrl = process.env.REACT_APP_BASE_URL
 
   let [users, setUsers] = useState([]);
 
@@ -57,14 +48,6 @@ export function Users() {
     getUsers();
   };
 
-  // recalling the get api
-  // const recallGetApi = async()=>{
-  //    await axios.get('/user-lao' ).then((resp)=>{
-  //         setUsers(resp.data.data);
-  //         console.log(resp.data.data, 'users data response');
-
-  //     });
-  // }
 
   // useDispatch
   let dispatch = useDispatch();
@@ -83,7 +66,7 @@ export function Users() {
         Add User
       </Button>
       {loading ? (
-        <h1>Loading.....</h1>
+        <h1>Loading...</h1>
       ) : (
         <UsersTable
           users={users}

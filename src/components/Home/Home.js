@@ -10,6 +10,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 // home componenet
 export default function Home() {
+
+  // const baseUrl = process.env.REACT_APP_BASE_URL;
+
   let [cheez, setCheez] = useState("");
 
   let data = useSelector((store) => {
@@ -23,7 +26,7 @@ export default function Home() {
 
   const getProducts = async () => {
     setLoading(true)
-    const response = await axios.get("/products");
+    const response = await axios.get(`/products`);
     if (response.status == 200) {
       setLoading(false)
       setProducts(response?.data);
