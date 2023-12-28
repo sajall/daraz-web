@@ -3,6 +3,8 @@ import ReactStars from "react-rating-stars-component";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { toast } from "react-toastify";
 // import { render } from "react-dom";
 
 export function Cards({ product , children }) {
@@ -27,14 +29,26 @@ let dispatch = useDispatch();
           style={{ width: "180px", height: "190px" }}
           alt="..."
         />
+
         {/* <img src="/fb.JPG" alt=""    id="cardimg"  className="card-img-top"     style={{ width: "180px", height: "190px" }}/> */}
         <div id="neechyWali">
 {/* like btn */}
-          <span className={ product.abc ? "like-btn liked " :'like-btn' } onClick={()=>{
-                     dispatch({
-                      type : "TOGGLE_LIKE_BTN",
-                      id:product.id
-                     })
+          <span className={ product.abc ? "like-btn liked " :'like-btn' } onClick={async()=>{
+            try{
+              const response = await axios.get(`/like-product?id=${product._id}`);
+              console.log(response.data , 'this is reponse like btn wala');
+               if(response.status == 200){
+                 dispatch({
+                  type : "TOGGLE_LIKE_BTN",
+                  id:response.data
+                 })
+               toast.success('liked successfully!');
+               }
+            }catch(err){
+                console.log(err , 'some unexpected error occured');
+            }
+
+
           }} >
             <svg
               xmlns="http://www.w3.org/2000/svg"

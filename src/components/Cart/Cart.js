@@ -20,11 +20,11 @@ function orderNow(){
     <>
 
       <div id="maincart">
-        <div>
+        {/* <div> */}
 
-        this is cart
-        {data.map((product) => {
-          total += product.price;
+        {/* this is cart */}
+        {data?.map((product) => {
+          total += +product.price;
           return (
             <div id="cartProduct">
               <img
@@ -45,7 +45,7 @@ function orderNow(){
             </div>
           );
         })}
-      </div>
+      {/* </div> */}
 <div>total :{total} </div>
 <button className="btn btn-primary" onClick={orderNow}>Order Now</button>
 </div>

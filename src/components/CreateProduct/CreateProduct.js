@@ -17,36 +17,39 @@ let user =  useSelector((store)=>store.UsersSection.userLoggedin);
 
 const createProdct = async (data)=>{
     data.userId = user._id;
-    let myData = new FormData();
+    // let myData = new FormData();
 
-    myData.append('category' , data.category);
-    myData.append('price' , data.price);
-    myData.append('file' , data.file[0]);
-    myData.append('userId' ,data.userId);
-    console.log(myData , 'this is formdata');
-    try{
-        const resp = await axios.post(`/create-product` ,myData);
-        if(resp.status == 200){
-            toast.success("product added successfully!");
-        }
-    }catch(err){
-        console.log(err , 'this is error');
-    }
-    // data.src = URL.createObjectURL(data.file[0]);
-    // const formData = {
-    //     userId: user._id,
-    //     category:myData.category,
-    //     price:myData.price,
-    //     src: myData.file
-    // }
+    // myData.append('category' , data.category);
+    // myData.append('price' , data.price);
+    // myData.append('file' , data.file[0]);
+    // myData.append('userId' ,data.userId);
+    // console.log(myData , 'this is formdata');
     // try{
-    //     const resp = await axios.post(`/create-product` ,formData);
+    //     const resp = await axios.post(`/create-product` ,myData);
     //     if(resp.status == 200){
     //         toast.success("product added successfully!");
     //     }
     // }catch(err){
     //     console.log(err , 'this is error');
     // }
+
+
+
+    // data.src = URL.createObjectURL(data.file[0]);
+    const formData = {
+        userId: data.userId,
+        category:data.category,
+        price:data.price,
+        src: data.src
+    }
+    try{
+        const resp = await axios.post(`/create-product` ,formData);
+        if(resp.status == 200){
+            toast.success("product added successfully!");
+        }
+    }catch(err){
+        console.log(err , 'this is error');
+    }
 }
 
 return (
@@ -54,7 +57,8 @@ return (
     <form action="" onSubmit={handleSubmit(createProdct)}  >
         <input {...register('category')} type="text" placeholder="enter category"/>
         <input {...register('price')} type="text" placeholder="enter price" />
-        <input {...register('file')} type="file" placeholder="" />
+        <input {...register('src')} type="text" placeholder="enter price" />
+        {/* <input {...register('file')} type="file" placeholder="" /> */}
     <button className="btn btn-primary">Create</button>
     </form>
     </div>

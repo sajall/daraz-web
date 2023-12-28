@@ -116,7 +116,7 @@ console.log(err , 'some error occured');
                 
                 dispatch({
                   type:"ADD_TO_CART",
-                  payload:product
+                  payload:product 
                 })
 
               }}>Add to Cart</button>

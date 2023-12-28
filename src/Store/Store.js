@@ -276,27 +276,32 @@ searched : '',
     ]
   }
       function productsSection( oldData = initialProducts , newData){
-        oldData = {...oldData , products:[...oldData.products]};
+        oldData = {...oldData , products:[...oldData.products] , orders:[...oldData.orders]};
         if(newData.type == 'SEARCH'){
           oldData.searched = newData.payload;
         }else if( newData.type =='ADD-NEW-PRODUCT'){
           oldData.products.push(newData.payload);
-        }else if( newData.type == "TOGGLE_LIKE_BTN"){
-         let item =  oldData.products.find((product)=>{
-          if(product.id == newData.id){
-            return true;
-          }
-         })
+        }
+      
+        else if( newData.type == "TOGGLE_LIKE_BTN"){
+        //  let item =  oldData.products.find((product)=>{
+        //   if(product.id == newData.id){
+        //     return true;
+        //   }
+        //  })
+        oldData.products.push(newData.payload)
          item.abc = !item.abc;
+        }
 
 
-        }else if(newData.type == "ADD_TO_CART"){
+        else if(newData.type == "ADD_TO_CART"){
         oldData.orders.push(newData.payload) ;
        
 
       }else if(newData.type == "REMOVE_FROM_CART"){
-        let item =  oldData.orders.find((product)=> product._id == newData.payload);
-        item.addTocart = !item.addTocart;
+        let itemindex =  oldData.orders.findIndex(ad=> ad._id == newData.payload);
+      oldData.orders.splice(itemindex , 1);
+      oldData={ ...oldData , orders:[...oldData.orders]}
       }else if(newData.type == "DELETE_PRODUCT"){
         let item =  oldData.products.find((product)=> product.id == newData.payload);
         oldData.products.splice(item , 1);
