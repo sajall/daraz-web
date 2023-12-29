@@ -8,6 +8,7 @@ import store from "../../Store/Store";
 import { Cart } from "../Cart/Cart";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getSingleProductApi } from "../../api/products/productsApis";
 
 
 export function ProductDetails() {
@@ -28,9 +29,12 @@ console.log(productId , 'this is product id');
 
 const findProduct = async()=>{
 try{
-  await axios.put(`/find-product/${productId}`).then((resp)=>{
+  // await axios.put(`/find-product/${productId}`).then((resp)=>{
+    await getSingleProductApi(productId).then((resp)=>{
     console.log(resp.data ,' this is PRODUCT THAT I FOUND');
   
+
+    
     if (resp.status === 200) {
       setproduct(resp.data);
     } else{

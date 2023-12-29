@@ -8,11 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import store from "../../Store/Store";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getproductsApi } from "../../api/products/productsApis";
 // home componenet
 export default function Home() {
 
   // const baseUrl = process.env.REACT_APP_BASE_URL;
-
+let dispatch = useDispatch();
   let [cheez, setCheez] = useState("");
 
   let data = useSelector((store) => {
@@ -22,14 +23,21 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   
   const [loading, setLoading] = useState(false);
-  console.log(products, "products");
+  // console.log(products, "products");
 
   const getProducts = async () => {
     setLoading(true)
-    const response = await axios.get(`/products`);
+    // const response = await axios.get(`/products`);
+    const response = await getproductsApi()
+
+    
     if (response.status == 200) {
       setLoading(false)
       setProducts(response?.data);
+      dispatch({
+        type : "ALL_PRODUCTS",
+        payload : response.data
+      })
     } else {
       toast.error("error fetching products");
     }

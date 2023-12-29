@@ -46,8 +46,6 @@ const getProducts = async () => {
 
 
 
-
-
     return(
         <>
            {/* <table border='2px' id="newCreatedProducts">

@@ -1,4 +1,6 @@
-
+#card-parent{
+position: relative;
+}
 #about{
     font-size: 12px;
     /* margin-top: 0px; */
@@ -21,13 +23,13 @@ box-shadow: 1px 1px 5px 1px lightgray;
 .like-btn{
     position: absolute;
     right: 0;
-    top: 150px;
-    width: 180px;
+    top: 160px;
+    width: 30px;
     height: 40px;
-    left: 5px;
+    left: 160px;
 /* margin: auto; */
-    background-color: white;
-    box-shadow: 2px 2px 2px 2px lightgray;
+    background-color: transparent;
+    /* box-shadow: 2px 2px 2px 2px lightgray; */
 }
 .liked{
     fill: red;

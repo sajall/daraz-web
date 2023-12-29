@@ -37,6 +37,7 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { deleteProductApi } from "../../api/products/productsApis";
 // import  './Users.css'
 
 export default function DashboardTable({products, setProducts ,
@@ -287,7 +288,10 @@ export default function DashboardTable({products, setProducts ,
                         //   isDelete: true,
                         // });
                         try{
-                          const response = await axios.delete(`/delete-product?id=${row._id}`);
+
+                          const response = await deleteProductApi(row?._id)
+
+                          // const response = await axios.delete(`/delete-product?id=${row._id}`);
                           if(response.status == 200){
                              products.splice(index , 1);
                             //  getProducts();

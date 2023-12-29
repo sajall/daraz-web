@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import './CreateProduct.css'
 import { v4 } from "uuid";
 import axios from 'axios';
+import { addProductApi } from "../../api/products/productsApis";
 
 export function CreateProduct(){
     let dispatch = useDispatch();
@@ -43,7 +44,9 @@ const createProdct = async (data)=>{
         src: data.src
     }
     try{
-        const resp = await axios.post(`/create-product` ,formData);
+        
+        // const resp = await axios.post(`/create-product` ,formData);
+        const resp = await addProductApi(formData)
         if(resp.status == 200){
             toast.success("product added successfully!");
         }
@@ -57,7 +60,7 @@ return (
     <form action="" onSubmit={handleSubmit(createProdct)}  >
         <input {...register('category')} type="text" placeholder="enter category"/>
         <input {...register('price')} type="text" placeholder="enter price" />
-        <input {...register('src')} type="text" placeholder="enter price" />
+        <input {...register('src')} type="text" placeholder="enter image path" />
         {/* <input {...register('file')} type="file" placeholder="" /> */}
     <button className="btn btn-primary">Create</button>
     </form>
