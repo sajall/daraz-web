@@ -4,22 +4,16 @@ import { useEffect, useState } from "react";
 import "./Product.css";
 import { useParams } from "react-router-dom";
 import { useSelector,  useDispatch} from "react-redux";
-import store from "../../Store/Store";
-import { Cart } from "../Cart/Cart";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { getSingleProductApi } from "../../api/products/productsApis";
 
 
 export function ProductDetails() {
-
-  // const baseUrl = process.env.REACT_APP_BASE_URL;
-
-
+  
+  let dispatch = useDispatch();
   let [quantity, setQuantity] = useState(1);
 
 
-  let dispatch = useDispatch();
   const params = useParams();
   const productId = params.id;
 console.log(productId , 'this is product id');
@@ -31,6 +25,7 @@ const findProduct = async()=>{
 try{
   // await axios.put(`/find-product/${productId}`).then((resp)=>{
     await getSingleProductApi(productId).then((resp)=>{
+      
     console.log(resp.data ,' this is PRODUCT THAT I FOUND');
   
 
@@ -126,7 +121,7 @@ console.log(err , 'some error occured');
               }}>Add to Cart</button>
             </div>
       </div>
-{/* <Cart/> */}
+
     </div>
   );
 }

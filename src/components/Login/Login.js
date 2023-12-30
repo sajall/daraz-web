@@ -2,20 +2,16 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { v4 } from "uuid";
 import { toast } from "react-toastify";
+import { findUserApi } from "../../api/users/usersApis";
 
-// axios.defaults.baseURL = "https://dark-plum-brown-bear-vest.cyclic.app/";
 
-// axios.defaults.baseURL = "http://localhost:6070/";
 
 export function Login({ user, setUser }) {
 
-// const baseUrl = process.env.REACT_APP_BASE_URL
-
   let move = useNavigate();
   let dispatch = useDispatch();
-  //  let users =useSelector((store)=>store.UsersSection.users);
+
 
   let {
     register,
@@ -24,7 +20,8 @@ export function Login({ user, setUser }) {
   } = useForm();
   const saveData = async (data) => {
     try {
-      const response = await axios.put(`/find-user`, data);
+      const response = await findUserApi(data);
+      //  axios.put(`/find-user`, data);
 
       // console.log(response.data.myToken , "responseresponseresponse");
 

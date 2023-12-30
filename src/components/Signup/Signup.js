@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
+import { addUserApi } from "../../api/users/usersApis";
 
-// axios.defaults.baseURL = "http://localhost:6070/";
+
 
 
 
@@ -24,26 +25,16 @@ let navigate =useNavigate();
 
     let {register , handleSubmit  , reset, formState:{errors}} = useForm();
     function saveData(data){
-      if(params.id){
-          axios.put(`/update-user/${params.id}` ,data).then((resp)=>{
-              if(resp.status === 200){
-                // recallGetApi();
 
-              }
-          });
-      }else{
-        // data.id = v4();
-        axios.post(`${baseUrl}/create-user` , data).then((resp)=>{
   
-        })
-      }
+        addUserApi(data);
+        // axios.post(`${baseUrl}/create-user` , data).then((resp)=>{
+  
+        // })
+      
       console.log(data);
       navigate('/Login')
-      // dispatch({
-      //   type: "ADD_USER",
-      //   payload:data
-      // })
-
+    
     }
      
 

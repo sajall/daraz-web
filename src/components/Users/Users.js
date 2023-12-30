@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import UsersTable from "./Userstable";
 import AddEditUser from "./AddEditUser";
 import { Button } from "@mui/material";
+import { getUsersApi } from "../../api/users/usersApis";
 // import { Button } from "bootstrap";
 
 // axios.defaults.baseURL = "https://dark-plum-brown-bear-vest.cyclic.app/";
@@ -31,7 +32,9 @@ export function Users() {
   const getUsers = async () => {
     setLoading(true);
     // const response = await axios.get("https://uptight-newt-jewelry.cyclic.app/user-lao");
-    const response = await axios.get(`${baseUrl}/user-lao`);
+    // const response = await axios.get(`${baseUrl}/user-lao`);
+    
+    const response = await getUsersApi();
     if (response.status == 200) {
       setLoading(false);
       setUsers(response?.data.data);

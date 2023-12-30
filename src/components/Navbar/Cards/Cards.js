@@ -10,11 +10,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import store from "../../../Store/Store";
 import { Button } from "@mui/material";
-import { likeProductApi } from "../../../api/products/productsApis";
+import { getproductsApi, likeProductApi } from "../../../api/products/productsApis";
 
 // import { render } from "react-dom";
 
-export function Cards({ product, children }) {
+export function Cards({ product, children}) {
   const ratingChanged = (newRating) => {
     console.log(newRating);
   };
@@ -40,8 +40,7 @@ export function Cards({ product, children }) {
             alt="..."
           />
 
-          {/* <img src="/fb.JPG" alt=""    id="cardimg "   className="card-img-top" 
-              style={{ width: "180px", height: "190px" }}/> */}
+      
           <div id="neechyWali">
             <p id="about">Portable Bamboo Charcoal Clothes</p>
             <b>{product.category}</b>
@@ -53,32 +52,31 @@ export function Cards({ product, children }) {
               activeColor="#ffd700"
             />
 
-            {/* <button id="detailsbtn" className="btn btn-primary">
-              show details
-          </button> */}
           </div>
         </div>
       </NavLink>
 
       {/* like btn */}
       <span
-        className={product.abc ? "like-btn liked " : "like-btn"}
+        className={"like-btn"}
         onClick={async () => {
+          
           try {
             //
             const response = await likeProductApi(product._id);
             if(response.status == 200){
-              
+    
             }
             // const response = await axios.get(`/like-product?id=${product._id}`);
             console.log(response.data, "this is reponse like btn wala");
           } catch (err) {
             console.log(err, "some unexpected error occured");
           }
+          
         }}
       >
         <Button>
-          {product.liked == true ? <FavoriteIcon style={{ color: "red" }} /> : <FavoriteBorder />}
+          {product.liked == true ? <FavoriteIcon style={{ color: "red" }} /> : <FavoriteBorder style={{ color: "black" }}  />}
         </Button>
       </span>
       {/* like btn */}

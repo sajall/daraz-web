@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { addUserApi, deleteuserApi, updateUserApi } from "../../api/users/usersApis";
 
 //  local imports
 // import { addUserApi, deleteUserApi, editUserApi } from "../../api/user/userApi";
@@ -60,20 +61,19 @@ const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
   useEffect(() => {
     if (addPopup.user) {
       reset({
-        // name: userData?.name,
         email: userData?.email,
         password: userData?.password,
-        // roleId: userData?.roleId,
       });
     }
   }, [addPopup.isOpen]);
 
   const onSubmit = async (data) => {
     if (!addPopup.isDelete && addPopup.id) {
-      const res = await axios.put(
-        `${baseUrl}/update-user/${addPopup.id}`,
-        data
-        );
+      const res = await updateUserApi( addPopup.id , data)
+      //  axios.put(
+      //   `${baseUrl}/update-user/${addPopup.id}`,
+      //   data
+      //   );
  
       if (res.status == 200) {
         toast.success("User Credientials Updated Successfully!");
@@ -86,10 +86,11 @@ const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
       }
     } else if (addPopup.isDelete && addPopup.id) {
     } else if (!addPopup.isDelete && !addPopup.id) {
-      const res = await axios.post(
-        '/create-user',
-        data
-        );
+      const res = await addUserApi(data);
+      //  axios.post(
+      //   '/create-user',
+      //   data
+      //   );
       if (res?.status == 200) {
         toast.success("User created Successfully!");
         handleClose();
@@ -235,10 +236,9 @@ const AddEditUser = ({ addPopup, setAddPopup, callFunc }) => {
                   >cancel</Button>
                   <Button variant="outlined"
                     onClick={async () => {
-                     
-                    const res = await axios.delete(`${baseUrl}/delete-user/${addPopup.id}` );
-                    
-
+                   
+                    // const res = await axios.delete(`${baseUrl}/delete-user/${addPopup.id}` );
+                    const res = await deleteuserApi(addPopup.id);                 
                       if (res.status == 200) {
                         toast.success("User Deleted!");
 

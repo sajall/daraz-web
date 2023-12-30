@@ -37,22 +37,32 @@ import {
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { deleteProductApi } from "../../api/products/productsApis";
-// import  './Users.css'
+import { deleteProductApi, getproductsApi } from "../../api/products/productsApis";
 
-export default function DashboardTable({products, setProducts ,
-    addPopup,
-    setAddPopup,
 
-}) {
+export default function DashboardTable() {
+
+ let [products , setProducts] = useState([]);
+ let [loading , setLoading] = useState(false);
+ 
+ const [addPopup, setAddPopup] = useState({
+  isOpen: false,
+  id: "",
+});
+
+  let user =  useSelector((store)=>{
+    return store.UsersSection.userLoggedin
+   });
 
   const getProducts = async () => {
-    // setLoading(true)
-    const response = await axios.get(`/products`);
+    setLoading(true)
+    const response = await getproductsApi();
+    //  axios.get(`/products`);
     if (response.status == 200) {
         console.log(response.data , ' this is dashborad');
-      // setLoading(false);
-      setProducts(response?.data);
+      setLoading(false);
+     let filteredProducts = response.data?.reverse().filter((product)=>product?.userId == user?._id)
+      setProducts(filteredProducts);
     } else {
       toast.error("error fetching products");
     }
@@ -65,9 +75,6 @@ export default function DashboardTable({products, setProducts ,
 
 
 
-  let user =  useSelector((store)=>{
-    return store.UsersSection.userLoggedin
-   });
 
   const theme = 'light'
 
@@ -215,7 +222,7 @@ export default function DashboardTable({products, setProducts ,
 {/* ======================================================================================================== */}
   
 
-              {  products?.reverse().filter((product)=>product?.userId == user?._id)
+              {          loading ? <h1>Loading.....</h1> : products
                 ?.slice((page - 1) * rowsPerPage, page * rowsPerPage)
                 .map((row, index) => {
                  const {category ,price , src} = row
@@ -227,36 +234,6 @@ export default function DashboardTable({products, setProducts ,
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        {/* <StyledBTableCell> */}
-                          {/* <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Avatar sx={{ background: "#e2fbf4", mr: "5px" }}>
-                              <CategoryIcon sx={{ color: "#1ee0ac" }} />
-                            </Avatar>
-                            <Box>
-                              <Typography
-                                sx={{
-                                  color: theme == "light" ? "#364a63" : "#fff",
-                                  fontSize: "14px",
-                                }}
-                              >
-                               name
-                              </Typography>
-                              <Typography
-                                sx={{
-                                  color: "#8094ae",
-                                  fontSize: "12px",
-                                }}
-                              >
-                               code
-                              </Typography>
-                            </Box>
-                          </Box>  */}
-                        {/* </StyledBTableCell> */}
                         <StyledBTableCell align="right">
                          <img id="product-image" style={{width:"150px", height:"150px"}} src={src} alt="" /> 
                         </StyledBTableCell>
@@ -282,11 +259,7 @@ export default function DashboardTable({products, setProducts ,
 
                     <Button
                       onClick={async() => {
-                        // setAddPopup({
-                        //   isOpen: true,
-                        //   id: row._id,
-                        //   isDelete: true,
-                        // });
+                     
                         try{
 
                           const response = await deleteProductApi(row?._id)
